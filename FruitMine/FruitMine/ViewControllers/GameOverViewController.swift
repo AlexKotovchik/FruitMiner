@@ -59,8 +59,8 @@ extension GameOverViewController {
         let duration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0.3
         UIView.animate(withDuration: duration) {
             self.scrollView.contentInset.bottom = keyboardFrame.height
-            let rect = self.homeButton.convert(self.homeButton.frame, to: self.stackView)
-            self.scrollView.scrollRectToVisible(rect, animated: false)
+//            let rect = self.homeButton.convert(self.homeButton.frame, to: self.stackView)
+//            self.scrollView.scrollRectToVisible(rect, animated: false)
         }
 
     }
