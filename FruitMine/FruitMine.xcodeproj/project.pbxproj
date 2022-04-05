@@ -11,6 +11,8 @@
 		E737E03327E9F0B2007067AD /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E737E03227E9F0B2007067AD /* GameOverViewController.swift */; };
 		E737E03727E9FF5E007067AD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E737E03627E9FF5E007067AD /* SettingsViewController.swift */; };
 		E737E03927EA0526007067AD /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E737E03827EA0525007067AD /* VibrationManager.swift */; };
+		E74581C127FBB62E00C08993 /* ScoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74581C027FBB62D00C08993 /* ScoresViewController.swift */; };
+		E74581C327FBBBAF00C08993 /* ScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74581C227FBBBAF00C08993 /* ScoreTableViewCell.swift */; };
 		E7B9F87F27E08E1F009D0CF4 /* GoldParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = E7B9F87E27E08E1E009D0CF4 /* GoldParticles.sks */; };
 		E7B9F88127E0A761009D0CF4 /* add_score.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E7B9F88027E0A761009D0CF4 /* add_score.mp3 */; };
 		E7B9F88627E0CB75009D0CF4 /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E7B9F88527E0CB75009D0CF4 /* background.mp3 */; };
@@ -37,6 +39,9 @@
 		E737E03227E9F0B2007067AD /* GameOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
 		E737E03627E9FF5E007067AD /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E737E03827EA0525007067AD /* VibrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibrationManager.swift; sourceTree = "<group>"; };
+		E74581BF27FB684E00C08993 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E74581C027FBB62D00C08993 /* ScoresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresViewController.swift; sourceTree = "<group>"; };
+		E74581C227FBBBAF00C08993 /* ScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewCell.swift; sourceTree = "<group>"; };
 		E7B9F87E27E08E1E009D0CF4 /* GoldParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GoldParticles.sks; sourceTree = "<group>"; };
 		E7B9F88027E0A761009D0CF4 /* add_score.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = add_score.mp3; sourceTree = "<group>"; };
 		E7B9F88527E0CB75009D0CF4 /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
@@ -77,6 +82,8 @@
 				E737E03027E9F096007067AD /* MenuViewController.swift */,
 				E737E03227E9F0B2007067AD /* GameOverViewController.swift */,
 				E737E03627E9FF5E007067AD /* SettingsViewController.swift */,
+				E74581C027FBB62D00C08993 /* ScoresViewController.swift */,
+				E74581C227FBBBAF00C08993 /* ScoreTableViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -127,9 +134,10 @@
 		E7F86C7C27DA24D400F6686A /* FruitMine */ = {
 			isa = PBXGroup;
 			children = (
+				E74581BF27FB684E00C08993 /* Info.plist */,
 				E7AC19EE27E32DFE003B9407 /* ViewControllers */,
 				E7B9F88727E0CF53009D0CF4 /* Extensions */,
-				E7F86C9E27DCE58600F6686A /* GameInteractiveManager */,
+				E7F86C9E27DCE58600F6686A /* GameManagers */,
 				E7F86C9B27DCBB1700F6686A /* Game */,
 				E7F86C9427DB40FF00F6686A /* Nodes */,
 				E7F86CA327DCF6C300F6686A /* Resources */,
@@ -155,7 +163,7 @@
 			path = Game;
 			sourceTree = "<group>";
 		};
-		E7F86C9E27DCE58600F6686A /* GameInteractiveManager */ = {
+		E7F86C9E27DCE58600F6686A /* GameManagers */ = {
 			isa = PBXGroup;
 			children = (
 				E7F86C9727DB7B7E00F6686A /* Options.swift */,
@@ -163,7 +171,7 @@
 				E7F86CA127DCE68200F6686A /* AudioSource.swift */,
 				E737E03827EA0525007067AD /* VibrationManager.swift */,
 			);
-			path = GameInteractiveManager;
+			path = GameManagers;
 			sourceTree = "<group>";
 		};
 		E7F86CA327DCF6C300F6686A /* Resources */ = {
@@ -267,6 +275,8 @@
 				E7F86C8627DA24D400F6686A /* GameViewController.swift in Sources */,
 				E737E03927EA0526007067AD /* VibrationManager.swift in Sources */,
 				E737E03327E9F0B2007067AD /* GameOverViewController.swift in Sources */,
+				E74581C127FBB62E00C08993 /* ScoresViewController.swift in Sources */,
+				E74581C327FBBBAF00C08993 /* ScoreTableViewCell.swift in Sources */,
 				E7F86C9827DB7B7E00F6686A /* Options.swift in Sources */,
 				E7F86C7E27DA24D400F6686A /* AppDelegate.swift in Sources */,
 				E7F86CA227DCE68200F6686A /* AudioSource.swift in Sources */,
@@ -421,6 +431,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5YX78AXA2X;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FruitMine/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -449,6 +460,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5YX78AXA2X;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FruitMine/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -18,11 +18,11 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         switch Options.shared.difficulty {
-        case GameDifficults.easy.rawValue:
+        case GameDifficults.easy:
             easyLevelChoosen()
-        case GameDifficults.middle.rawValue:
+        case GameDifficults.middle:
             middleLevelChoosen()
-        case GameDifficults.hard.rawValue:
+        case GameDifficults.hard:
             highLevelChoosen()
         default:
             easyLevelChoosen()
@@ -64,20 +64,20 @@ class SettingsViewController: UIViewController {
     }
     
     func easyLevelChoosen() {
-        Options.shared.difficulty = GameDifficults.easy.rawValue
+        Options.shared.difficulty = GameDifficults.easy
         easyLevelButton.isSelected = true
         middleLevelButton.isSelected = false
         hardLevelButton.isSelected = false
     }
 
     func middleLevelChoosen() {
-        Options.shared.difficulty = GameDifficults.middle.rawValue
+        Options.shared.difficulty = GameDifficults.middle
         easyLevelButton.isSelected = false
         middleLevelButton.isSelected = true
         hardLevelButton.isSelected = false
     }
     func highLevelChoosen() {
-        Options.shared.difficulty = GameDifficults.hard.rawValue
+        Options.shared.difficulty = GameDifficults.hard
         easyLevelButton.isSelected = false
         middleLevelButton.isSelected = false
         hardLevelButton.isSelected = true

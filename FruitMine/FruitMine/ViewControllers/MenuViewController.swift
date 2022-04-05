@@ -15,13 +15,7 @@ class MenuViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         if Options.shared.sound {
             AudioManager.shared.play(music: MusicFiles.background)
-
         }
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        if Options.shared.sound {
-            AudioManager.shared.play(music: MusicFiles.background)
-        }
-    }
 }

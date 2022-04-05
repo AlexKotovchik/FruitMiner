@@ -63,10 +63,11 @@ class GameViewController: UIViewController {
 }
 
 extension GameViewController: GameProtocol {
-    func showGameOverVC() {
+    func showGameOverVC(score: Int) {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "GameOverViewController") as? GameOverViewController else { return }
         vc.delegate = self
+        vc.score = score
         vc.modalPresentationStyle = .overCurrentContext
         vc.modalTransitionStyle = .crossDissolve
         present(vc, animated: true)

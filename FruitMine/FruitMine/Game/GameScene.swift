@@ -9,7 +9,7 @@ import SpriteKit
 import GameplayKit
 
 protocol GameProtocol: AnyObject {
-    func showGameOverVC()
+    func showGameOverVC(score: Int)
     func resetStartButton()
 }
 
@@ -17,21 +17,22 @@ class GameScene: SKScene {
     weak var gameDelegate: GameProtocol?
     
     var cards: [Card] = []
+    var copyCards: [Card] = []
     var bombs: [Card] = []
     var label: SKLabelNode?
     var livesLabel: SKLabelNode?
     var scoreLabel: SKLabelNode?
     
     var gameLogic: GameLogic = .init()
-    let difficulty: GameDifficults = GameDifficults(rawValue: Options.shared.difficulty) ?? .easy
     
     var cardSize: CGSize {
-        let count = CGFloat(difficulty.size)
+        let count = CGFloat(gameLogic.difficulty.size)
         let cardWidth = (Constants.screenWidth - 40 - 5 * (count - 1)) / count
         return CGSize(width: cardWidth, height: cardWidth * 1.3)
     }
     
     override func didMove(to view: SKView) {
+        setupBackground()
         setupField()
         setupLivesLabel()
         setupScorelabel()
@@ -45,6 +46,7 @@ class GameScene: SKScene {
         let touchedNodes = nodes(at: location)
         for node in touchedNodes {
             if let card = node as? Card {
+//                card.isUserInteractionEnabled = false
                 openCard(card)
                 checkForBomb(card: card)
                 checkForSpecial(card: card)
@@ -65,12 +67,22 @@ class GameScene: SKScene {
         // Called before each frame is rendered
     }
     
+    func setupBackground() {
+        guard let backgroundImage = UIImage(named: "background_game") else {return}
+        let background = SKTexture(image: backgroundImage)
+        let backgroundNode = SKSpriteNode(texture: background)
+        backgroundNode.size = frame.size
+//        backgroundNode.anchorPoint = CGPoint(x: 0, y: 0)
+        backgroundNode.zPosition = ZOrder.background
+        addChild(backgroundNode)
+    }
+    
     func setupLivesLabel() {
-        let livesLabel = SKLabelNode(fontNamed: "Rum Raisin")
+        let livesLabel = SKLabelNode(fontNamed: "Chalkduster")
         livesLabel.horizontalAlignmentMode = .center
         livesLabel.verticalAlignmentMode = .bottom
-        livesLabel.fontSize = 20
-        livesLabel.fontColor = .gray
+        livesLabel.fontSize = 22
+        livesLabel.fontColor = .white
         livesLabel.text = "Lives: \(gameLogic.livesCount)"
         livesLabel.position = CGPoint(x: -(Constants.screenWidth / 2) + livesLabel.frame.width / 2 + 20, y: Constants.screenHeight / 2 - (Constants.topPadding ?? 0) - 100)
         livesLabel.zPosition = ZOrder.label
@@ -79,22 +91,22 @@ class GameScene: SKScene {
     }
     
     func setupScorelabel() {
-        let scorelabel = SKLabelNode(fontNamed: "Rum Raisin")
+        let scorelabel = SKLabelNode(fontNamed: "Chalkduster")
         scorelabel.horizontalAlignmentMode = .center
         scorelabel.verticalAlignmentMode = .bottom
-        scorelabel.fontSize = 20
-        scorelabel.fontColor = .gray
+        scorelabel.fontSize = 22
+        scorelabel.fontColor = .white
         scorelabel.text = "\(gameLogic.score)"
         scorelabel.position = CGPoint(x: self.frame.maxX - scorelabel.frame.width / 2 - 20, y: Constants.screenHeight / 2 - (Constants.topPadding ?? 0) - 100)
         scorelabel.zPosition = ZOrder.label
         addChild(scorelabel)
         self.scoreLabel = scorelabel
         
-        let label = SKLabelNode(fontNamed: "Rum Raisin")
+        let label = SKLabelNode(fontNamed: "Chalkduster")
         label.horizontalAlignmentMode = .center
         label.verticalAlignmentMode = .bottom
-        label.fontSize = 20
-        label.fontColor = .gray
+        label.fontSize = 22
+        label.fontColor = .white
         label.text = "Score:"
         label.position = CGPoint(x: (scoreLabel?.frame.minX ?? 0)  - label.frame.width / 2 - 5, y: Constants.screenHeight / 2 - (Constants.topPadding ?? 0) - 100)
         scorelabel.zPosition = ZOrder.label
@@ -104,7 +116,7 @@ class GameScene: SKScene {
     }
     
     func setupField() {
-        let count = difficulty.size
+        let count = gameLogic.difficulty.size
         
         let startPoint = CGPoint(x: -(cardSize.width * CGFloat(count) + Constants.cardSpacing * CGFloat(count - 1)) / 2 + cardSize.width / 2, y: -(cardSize.height * CGFloat(count)) / 2 - 50 + cardSize.height / 2)
 
@@ -123,12 +135,13 @@ class GameScene: SKScene {
             currentY += cardSize.height + Constants.cardSpacing
         }
         self.cards = cards
+        self.copyCards = cards
         
         setBombs()
     }
     
     func setBombs() {
-        let bombCount = difficulty.bombs
+        let bombCount = gameLogic.difficulty.bombs
         var copyCards = self.cards
         for _ in 0...(bombCount - 1) {
             guard let randomCard = copyCards.randomElement() else { return }
@@ -140,7 +153,7 @@ class GameScene: SKScene {
     }
     
     func setSpecialCard(in cards: [Card]) {
-        guard difficulty == .hard else { return }
+        guard gameLogic.difficulty == .hard else { return }
         guard let randomCard = cards.randomElement() else { return }
         randomCard.isSpecial = true
     }
@@ -168,7 +181,7 @@ class GameScene: SKScene {
         scoreLabel?.run(repeatAction)
     }
     
-    func openAllCards(completion: (() -> Void)? = nil) {
+    func openAllCards(cards: [Card], completion: (() -> Void)? = nil) {
         for card in cards {
             openCard(card)
         }
@@ -180,10 +193,10 @@ class GameScene: SKScene {
         if card.isBomb {
             gameLogic.zeroStreak()
             updateLivesLabel()
-            AudioManager.shared.play(effect: .bomb, node: card)
+            play(effect: .bomb, node: card)
             VibrationManager.shared.heavyImpact()
             if gameLogic.livesCount == 0 {
-                self.gameDelegate?.showGameOverVC()
+                self.gameDelegate?.showGameOverVC(score: gameLogic.score)
             }
         } else {
             gameLogic.increaseStreak()
@@ -193,35 +206,31 @@ class GameScene: SKScene {
             }
             updateLivesLabel()
             updateScoreLabel()
-            AudioManager.shared.play(effect: .correct, node: self)
+            play(effect: .correct, node: self)
             checkForWIn()
         }
     }
     
     func checkForWIn() {
-        if cards.filter({ !$0.isBomb }).isEmpty {
-            print("youwin")
-            openAllCards() {
-                let wait = SKAction.wait(forDuration: 1)
-                let completion = SKAction.run {
-                    self.openAllCards() {
-                        let reset = SKAction.run {
-                            for child in self.children {
-                                if child.name == "card" {
-                                    child.removeFromParent()
-                                }
-                            }
-                            self.isUserInteractionEnabled = false
-                            self.gameDelegate?.resetStartButton()
-                            self.setupField()
-                        }
-                        self.run(SKAction.sequence([wait, reset]))
-                    }
-                }
-                self.run(SKAction.sequence([wait, completion]))
-            }
-            
+        guard cards.filter({ !$0.isBomb }).isEmpty  else { return }
+        self.isUserInteractionEnabled = false
+        print("youwin")
+        let openBombs = SKAction.run {
+            self.openAllCards(cards: self.cards)
         }
+        let openAllCards = SKAction.run {
+            self.openAllCards(cards: self.copyCards)
+        }
+        let reset = SKAction.run {
+            for child in self.children {
+                if child.name == "card" {
+                    child.removeFromParent()
+                }
+            }
+            self.gameDelegate?.resetStartButton()
+            self.setupField()
+        }
+        self.run(SKAction.sequence([wait(0.5), openBombs, wait(1.0), openAllCards, wait(0.5), reset]))
     }
     
     func checkForSpecial(card: Card) {
@@ -235,7 +244,7 @@ class GameScene: SKScene {
         let addSplash = SKAction.customAction(withDuration: 0) {_, _ in
             splash.position = card.position
             self.addChild(splash)
-            AudioManager.shared.play(effect: .coins, node: self)
+            self.play(effect: .coins, node: self)
         }
         let deleteSplash = SKAction.customAction(withDuration: 0) {_, _ in
             splash.removeFromParent()
@@ -255,12 +264,23 @@ class GameScene: SKScene {
     }
     
     func showCards() {
-        let delay = Double(difficulty.timer)
-        openAllCards()
+        let delay = Double(gameLogic.difficulty.timer)
+        openAllCards(cards: cards)
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.openAllCards()
+            self.openAllCards(cards: self.cards)
             self.isUserInteractionEnabled = true
         }
+    }
+    
+    func wait(_ seconds: Double) -> SKAction {
+        SKAction.wait(forDuration: seconds)
+    }
+    
+    func play(effect: AudioEffect, node: SKNode) {
+        guard Options.shared.sound else {
+            return
+        }
+        node.run(.play(effect: effect))
     }
 }
 

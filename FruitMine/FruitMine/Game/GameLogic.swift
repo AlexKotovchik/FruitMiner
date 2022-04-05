@@ -12,7 +12,7 @@ class GameLogic {
     var currentStreak = 0
     var score = 0
     
-    let difficulty: GameDifficults = GameDifficults(rawValue: Options.shared.difficulty) ?? .easy
+    let difficulty = Options.shared.difficulty
     
     func increaseStreak() {
         currentStreak += 1

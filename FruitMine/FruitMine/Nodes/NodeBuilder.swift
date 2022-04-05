@@ -24,7 +24,7 @@ struct Constants {
     static let screenWidth: CGFloat = UIScreen.main.bounds.width
     static let screenHeight: CGFloat = UIScreen.main.bounds.height
     static var cardWidth: CGFloat {
-        let count = CGFloat(GameDifficults(rawValue: Options.shared.difficulty)?.size ?? 4)
+        let count = CGFloat(Options.shared.difficulty.size)
         return (screenWidth - 40 - 5 * (count - 1)) / count
     }
     static let cardSpacing: CGFloat = 5
