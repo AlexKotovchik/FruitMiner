@@ -304,18 +304,18 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="qfo-Se-4a8" firstAttribute="centerX" secondItem="MpO-du-neL" secondAttribute="centerX" id="Hlw-GT-ApM"/>
-                                            <constraint firstAttribute="bottom" secondItem="qfo-Se-4a8" secondAttribute="bottom" constant="100" id="TZY-7j-o4R"/>
-                                            <constraint firstItem="qfo-Se-4a8" firstAttribute="top" secondItem="MpO-du-neL" secondAttribute="top" constant="100" id="eWR-Jo-lcb"/>
+                                            <constraint firstItem="qfo-Se-4a8" firstAttribute="centerX" secondItem="MpO-du-neL" secondAttribute="centerX" id="4Aw-L1-lvR"/>
+                                            <constraint firstAttribute="bottom" secondItem="qfo-Se-4a8" secondAttribute="bottom" constant="100" id="Gep-I3-1Qx"/>
+                                            <constraint firstItem="qfo-Se-4a8" firstAttribute="top" secondItem="MpO-du-neL" secondAttribute="top" constant="100" id="Jyx-0E-RcC"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="MpO-du-neL" firstAttribute="bottom" secondItem="JrA-ev-E6N" secondAttribute="bottom" id="CXh-DR-PAA"/>
                                     <constraint firstItem="MpO-du-neL" firstAttribute="trailing" secondItem="JrA-ev-E6N" secondAttribute="trailing" id="NMr-sm-Jqz"/>
                                     <constraint firstItem="MpO-du-neL" firstAttribute="width" secondItem="wKo-Td-cy7" secondAttribute="width" id="OD3-j0-0O3"/>
-                                    <constraint firstItem="MpO-du-neL" firstAttribute="bottom" secondItem="JrA-ev-E6N" secondAttribute="bottom" id="Qh8-EQ-amc"/>
+                                    <constraint firstItem="MpO-du-neL" firstAttribute="top" secondItem="JrA-ev-E6N" secondAttribute="top" id="VRr-Vr-a3Q"/>
                                     <constraint firstItem="MpO-du-neL" firstAttribute="leading" secondItem="JrA-ev-E6N" secondAttribute="leading" id="lic-Wf-6ea"/>
-                                    <constraint firstItem="MpO-du-neL" firstAttribute="top" secondItem="JrA-ev-E6N" secondAttribute="top" id="ofe-H6-BGY"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="JrA-ev-E6N"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="hP2-ax-JZm"/>
@@ -405,7 +405,6 @@
                                         <connections>
                                             <outlet property="playerLabel" destination="oMx-Sa-hvZ" id="OIk-al-6mV"/>
                                             <outlet property="scoreLabel" destination="Vx4-mC-tjL" id="r0g-8x-w3i"/>
-                                            <outlet property="scoreView" destination="sjX-jG-Tck" id="94B-hL-KMC"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

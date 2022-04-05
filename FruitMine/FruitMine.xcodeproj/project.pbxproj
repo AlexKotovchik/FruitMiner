@@ -13,6 +13,8 @@
 		E737E03927EA0526007067AD /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E737E03827EA0525007067AD /* VibrationManager.swift */; };
 		E74581C127FBB62E00C08993 /* ScoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74581C027FBB62D00C08993 /* ScoresViewController.swift */; };
 		E74581C327FBBBAF00C08993 /* ScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74581C227FBBBAF00C08993 /* ScoreTableViewCell.swift */; };
+		E74581C527FC4C8B00C08993 /* ScoreStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74581C427FC4C8A00C08993 /* ScoreStorage.swift */; };
+		E74581C727FC51AE00C08993 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74581C627FC51AD00C08993 /* Constants.swift */; };
 		E7B9F87F27E08E1F009D0CF4 /* GoldParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = E7B9F87E27E08E1E009D0CF4 /* GoldParticles.sks */; };
 		E7B9F88127E0A761009D0CF4 /* add_score.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E7B9F88027E0A761009D0CF4 /* add_score.mp3 */; };
 		E7B9F88627E0CB75009D0CF4 /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E7B9F88527E0CB75009D0CF4 /* background.mp3 */; };
@@ -25,7 +27,7 @@
 		E7F86C8927DA24D400F6686A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7F86C8727DA24D400F6686A /* Main.storyboard */; };
 		E7F86C8B27DA24D600F6686A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7F86C8A27DA24D600F6686A /* Assets.xcassets */; };
 		E7F86C8E27DA24D600F6686A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7F86C8C27DA24D600F6686A /* LaunchScreen.storyboard */; };
-		E7F86C9627DB411800F6686A /* NodeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F86C9527DB411800F6686A /* NodeBuilder.swift */; };
+		E7F86C9627DB411800F6686A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F86C9527DB411800F6686A /* Card.swift */; };
 		E7F86C9827DB7B7E00F6686A /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F86C9727DB7B7E00F6686A /* Options.swift */; };
 		E7F86C9D27DCBB2300F6686A /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F86C9C27DCBB2300F6686A /* GameLogic.swift */; };
 		E7F86CA027DCE5AD00F6686A /* AudioManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F86C9F27DCE5AD00F6686A /* AudioManger.swift */; };
@@ -42,6 +44,8 @@
 		E74581BF27FB684E00C08993 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E74581C027FBB62D00C08993 /* ScoresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresViewController.swift; sourceTree = "<group>"; };
 		E74581C227FBBBAF00C08993 /* ScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewCell.swift; sourceTree = "<group>"; };
+		E74581C427FC4C8A00C08993 /* ScoreStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreStorage.swift; sourceTree = "<group>"; };
+		E74581C627FC51AD00C08993 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E7B9F87E27E08E1E009D0CF4 /* GoldParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GoldParticles.sks; sourceTree = "<group>"; };
 		E7B9F88027E0A761009D0CF4 /* add_score.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = add_score.mp3; sourceTree = "<group>"; };
 		E7B9F88527E0CB75009D0CF4 /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
@@ -55,7 +59,7 @@
 		E7F86C8827DA24D400F6686A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E7F86C8A27DA24D600F6686A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7F86C8D27DA24D600F6686A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		E7F86C9527DB411800F6686A /* NodeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeBuilder.swift; sourceTree = "<group>"; };
+		E7F86C9527DB411800F6686A /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		E7F86C9727DB7B7E00F6686A /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		E7F86C9C27DCBB2300F6686A /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		E7F86C9F27DCE5AD00F6686A /* AudioManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManger.swift; sourceTree = "<group>"; };
@@ -78,8 +82,8 @@
 		E7AC19EE27E32DFE003B9407 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				E7F86C8527DA24D400F6686A /* GameViewController.swift */,
 				E737E03027E9F096007067AD /* MenuViewController.swift */,
+				E7F86C8527DA24D400F6686A /* GameViewController.swift */,
 				E737E03227E9F0B2007067AD /* GameOverViewController.swift */,
 				E737E03627E9FF5E007067AD /* SettingsViewController.swift */,
 				E74581C027FBB62D00C08993 /* ScoresViewController.swift */,
@@ -111,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				E7B9F88827E0CF69009D0CF4 /* SKAction+Extensions.swift */,
+				E74581C627FC51AD00C08993 /* Constants.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -149,7 +154,7 @@
 		E7F86C9427DB40FF00F6686A /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
-				E7F86C9527DB411800F6686A /* NodeBuilder.swift */,
+				E7F86C9527DB411800F6686A /* Card.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				E7F86C9727DB7B7E00F6686A /* Options.swift */,
+				E74581C427FC4C8A00C08993 /* ScoreStorage.swift */,
 				E7F86C9F27DCE5AD00F6686A /* AudioManger.swift */,
 				E7F86CA127DCE68200F6686A /* AudioSource.swift */,
 				E737E03827EA0525007067AD /* VibrationManager.swift */,
@@ -267,11 +273,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7B9F88927E0CF69009D0CF4 /* SKAction+Extensions.swift in Sources */,
+				E74581C727FC51AE00C08993 /* Constants.swift in Sources */,
 				E737E03127E9F097007067AD /* MenuViewController.swift in Sources */,
 				E7F86C9D27DCBB2300F6686A /* GameLogic.swift in Sources */,
 				E7F86CA027DCE5AD00F6686A /* AudioManger.swift in Sources */,
 				E7F86C8427DA24D400F6686A /* GameScene.swift in Sources */,
-				E7F86C9627DB411800F6686A /* NodeBuilder.swift in Sources */,
+				E7F86C9627DB411800F6686A /* Card.swift in Sources */,
 				E7F86C8627DA24D400F6686A /* GameViewController.swift in Sources */,
 				E737E03927EA0526007067AD /* VibrationManager.swift in Sources */,
 				E737E03327E9F0B2007067AD /* GameOverViewController.swift in Sources */,
@@ -280,6 +287,7 @@
 				E7F86C9827DB7B7E00F6686A /* Options.swift in Sources */,
 				E7F86C7E27DA24D400F6686A /* AppDelegate.swift in Sources */,
 				E7F86CA227DCE68200F6686A /* AudioSource.swift in Sources */,
+				E74581C527FC4C8B00C08993 /* ScoreStorage.swift in Sources */,
 				E737E03727E9FF5E007067AD /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

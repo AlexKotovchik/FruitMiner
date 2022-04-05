@@ -15,7 +15,7 @@ class ScoresViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
+        scoresTableView.dataSource = self
 
     }
     
@@ -31,13 +31,6 @@ class ScoresViewController: UIViewController {
     
 }
 
-extension ScoresViewController {
-    func setupTableView() {
-        scoresTableView.delegate = self
-        scoresTableView.dataSource = self
-    }
-}
-
 extension ScoresViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         scores.count
@@ -49,10 +42,5 @@ extension ScoresViewController: UITableViewDataSource {
         cell.scoreLabel.text = "\(scores[indexPath.row].score)"
         return cell
     }
-    
-    
-}
-
-extension ScoresViewController: UITableViewDelegate {
     
 }

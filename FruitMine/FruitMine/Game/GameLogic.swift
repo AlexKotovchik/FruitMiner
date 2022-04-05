@@ -8,11 +8,11 @@
 import Foundation
 
 class GameLogic {
-    var livesCount: Int = 3
-    var currentStreak = 0
-    var score = 0
+    var currentStreak: Int = 0
+    var score: Int = 0
     
-    let difficulty = Options.shared.difficulty
+    let difficulty: GameDifficults = Options.shared.difficulty
+    var livesCount: Int = Options.shared.difficulty.lives
     
     func increaseStreak() {
         currentStreak += 1
@@ -36,10 +36,14 @@ class GameLogic {
     
     func addScore(currentStreak: Int) {
         let streak = difficulty.streak
-        score += (100 + 100 * (currentStreak - streak)) / 10
+        if checkForStreak(currentStreak: currentStreak) {
+            score += (100 + 100 * (currentStreak - streak)) / 10
+        } else {
+            score += 100 / 10
+        }
     }
     
-    func checkForStreak() -> Bool {
+    func checkForStreak(currentStreak: Int) -> Bool {
         let streak = difficulty.streak
         return currentStreak >= streak
     }

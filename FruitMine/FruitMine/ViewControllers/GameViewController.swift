@@ -9,12 +9,8 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-protocol GameViewControllerDelegate: AnyObject {
-    func startGame()
-}
 
 class GameViewController: UIViewController {
-    weak var delegate: GameViewControllerDelegate?
     var scene: GameScene?
     
     @IBOutlet weak var startButton: UIButton!
@@ -26,9 +22,7 @@ class GameViewController: UIViewController {
         scene = GameScene(size: view.bounds.size)
         scene?.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         let skView = view as! SKView
-        self.delegate = scene
         scene?.gameDelegate = self
-        skView.ignoresSiblingOrder = true
         scene?.scaleMode = .resizeFill
         skView.presentScene(scene)
         
@@ -52,7 +46,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func startButtonPressed(_ sender: UIButton) {
-        scene?.startGame()
+        scene?.showCards()
         startButton.isHidden = true
     }
     

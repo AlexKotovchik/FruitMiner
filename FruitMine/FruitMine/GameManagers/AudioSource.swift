@@ -7,7 +7,11 @@
 
 import Foundation
 
-    
+struct Music {
+    public var filename: String
+    public var type: String
+}
+
 struct MusicFiles {
     static let background = Music(filename: "background", type: "mp3")
 }

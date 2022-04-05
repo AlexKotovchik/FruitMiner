@@ -9,11 +9,6 @@ import AVFoundation
 import AVKit
 import SpriteKit
 
-public struct Music {
-    public var filename: String
-    public var type: String
-}
-
 class AudioManager {
     
     public var backgroundMusicPlayer: AVAudioPlayer?

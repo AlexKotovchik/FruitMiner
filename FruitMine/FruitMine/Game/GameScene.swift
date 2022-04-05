@@ -54,25 +54,12 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-    }
-    
+    // MARK: - Set ui
     func setupBackground() {
         guard let backgroundImage = UIImage(named: "background_game") else {return}
         let background = SKTexture(image: backgroundImage)
         let backgroundNode = SKSpriteNode(texture: background)
         backgroundNode.size = frame.size
-//        backgroundNode.anchorPoint = CGPoint(x: 0, y: 0)
         backgroundNode.zPosition = ZOrder.background
         addChild(backgroundNode)
     }
@@ -126,7 +113,7 @@ class GameScene: SKScene {
         for _ in 0...(count - 1) {
             var currentX = startPoint.x
             for _ in 0...(count - 1) {
-                let card = NodeBuilder.createCard(size: cardSize)
+                let card = Card(size: cardSize)
                 card.position = CGPoint(x: currentX, y: currentY)
                 addChild(card)
                 currentX += card.size.width + Constants.cardSpacing
@@ -140,6 +127,7 @@ class GameScene: SKScene {
         setBombs()
     }
     
+    // MARK: -  Set cards
     func setBombs() {
         let bombCount = gameLogic.difficulty.bombs
         var copyCards = self.cards
@@ -158,6 +146,14 @@ class GameScene: SKScene {
         randomCard.isSpecial = true
     }
     
+    // MARK: - Cards methods
+    func openAllCards(cards: [Card], completion: (() -> Void)? = nil) {
+        for card in cards {
+            openCard(card)
+        }
+        completion?()
+    }
+    
     func openCard(_ card: Card) {
         let scaleDownX = SKAction.scaleX(to: 0, duration: 0.15)
         let change = SKAction.run {
@@ -169,25 +165,17 @@ class GameScene: SKScene {
         })
     }
     
-    func increaseScore(currentStreak: Int) {
-        let scaleUp = SKAction.scale(to: 1.3, duration: 0.05)
-        let scaleDown = SKAction.scale(to: 1, duration: 0.05)
-        let addScore = SKAction.run { [weak self] in
-            self?.gameLogic.addScore(currentStreak: currentStreak)
-            self?.updateScoreLabel()
+    func showCards() {
+        isUserInteractionEnabled = false
+        let delay = Double(gameLogic.difficulty.timer)
+        openAllCards(cards: cards)
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            self.openAllCards(cards: self.cards)
+            self.isUserInteractionEnabled = true
         }
-        let seq = SKAction.sequence([scaleUp, addScore, scaleDown])
-        let repeatAction = SKAction.repeat(seq, count: 10)
-        scoreLabel?.run(repeatAction)
     }
     
-    func openAllCards(cards: [Card], completion: (() -> Void)? = nil) {
-        for card in cards {
-            openCard(card)
-        }
-        completion?()
-    }
-    
+    // MARK: - Gamelogic
     func checkForBomb(card: Card) {
         cards = cards.filter { $0 != card }
         if card.isBomb {
@@ -200,15 +188,31 @@ class GameScene: SKScene {
             }
         } else {
             gameLogic.increaseStreak()
-            if gameLogic.checkForStreak() {
-                increaseScore(currentStreak: gameLogic.currentStreak)
-                animateScoreIncrease(card: card)
-            }
+            increaseScore(currentStreak: gameLogic.currentStreak)
+            animateScoreIncrease(card: card)
             updateLivesLabel()
             updateScoreLabel()
             play(effect: .correct, node: self)
             checkForWIn()
         }
+    }
+    
+    func checkForSpecial(card: Card) {
+        if card.isSpecial {
+            showCards()
+        }
+    }
+    
+    func increaseScore(currentStreak: Int) {
+        let scaleUp = SKAction.scale(to: 1.3, duration: 0.05)
+        let scaleDown = SKAction.scale(to: 1, duration: 0.05)
+        let addScore = SKAction.run { [weak self] in
+            self?.gameLogic.addScore(currentStreak: currentStreak)
+            self?.updateScoreLabel()
+        }
+        let seq = SKAction.sequence([scaleUp, addScore, scaleDown])
+        let repeatAction = SKAction.repeat(seq, count: 10)
+        scoreLabel?.run(repeatAction)
     }
     
     func checkForWIn() {
@@ -233,26 +237,7 @@ class GameScene: SKScene {
         self.run(SKAction.sequence([wait(0.5), openBombs, wait(1.0), openAllCards, wait(0.5), reset]))
     }
     
-    func checkForSpecial(card: Card) {
-        if card.isSpecial {
-            showCards()
-        }
-    }
-    
-    func animateScoreIncrease(card: Card) {
-        let splash = NodeBuilder.createGoldSplash()
-        let addSplash = SKAction.customAction(withDuration: 0) {_, _ in
-            splash.position = card.position
-            self.addChild(splash)
-            self.play(effect: .coins, node: self)
-        }
-        let deleteSplash = SKAction.customAction(withDuration: 0) {_, _ in
-            splash.removeFromParent()
-        }
-        let seq = SKAction.sequence([addSplash, .wait(forDuration: 0.5), deleteSplash])
-        card.run(seq)
-    }
-    
+    // MARK: - Update labels
     func updateLivesLabel() {
         livesLabel?.text = "Lives: \(gameLogic.livesCount)"
     }
@@ -263,13 +248,21 @@ class GameScene: SKScene {
         label?.position = CGPoint(x: (scoreLabel?.frame.minX ?? 0)  - (label?.frame.width ?? 0) / 2 - 5, y: Constants.screenHeight / 2 - (Constants.topPadding ?? 0) - 100)
     }
     
-    func showCards() {
-        let delay = Double(gameLogic.difficulty.timer)
-        openAllCards(cards: cards)
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.openAllCards(cards: self.cards)
-            self.isUserInteractionEnabled = true
+    // MARK: - Actions
+    func animateScoreIncrease(card: Card) {
+        guard let splash = SKEmitterNode(fileNamed: "GoldParticles") else { return }
+        splash.particleSize = CGSize(width: 7, height: 7)
+        splash.zPosition = ZOrder.emitters
+        splash.position = card.position
+        let addSplash = SKAction.customAction(withDuration: 0) {_, _ in
+            self.addChild(splash)
+            self.play(effect: .coins, node: self)
         }
+        let deleteSplash = SKAction.customAction(withDuration: 0) {_, _ in
+            splash.removeFromParent()
+        }
+        let seq = SKAction.sequence([addSplash, .wait(forDuration: 0.5), deleteSplash])
+        card.run(seq)
     }
     
     func wait(_ seconds: Double) -> SKAction {
@@ -282,10 +275,5 @@ class GameScene: SKScene {
         }
         node.run(.play(effect: effect))
     }
-}
-
-extension GameScene: GameViewControllerDelegate {
-    func startGame() {
-        showCards()
-    }
+    
 }

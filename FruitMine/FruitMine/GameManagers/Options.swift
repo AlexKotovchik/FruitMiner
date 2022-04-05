@@ -12,6 +12,17 @@ enum GameDifficults: Int {
     case middle = 5
     case hard = 6
     
+    var lives: Int {
+        switch self {
+        case .easy:
+            return 3
+        case .middle:
+            return 4
+        case .hard:
+            return 5
+        }
+    }
+    
     var size: Int {
         switch self {
         case .easy:
@@ -107,30 +118,6 @@ class Options {
         }
         get {
             return GameDifficults(rawValue: UserDefaults.standard.integer(forKey: DefaultKeys.difficulty)) ?? .easy
-        }
-    }
-}
-
-//public typealias Score = (name: String, score: String)
-
-struct Score: Codable {
-    var playerName: String
-    var score: Int
-}
-
-class Storage {
-    static let shared = Storage()
-    
-    var scores: [Score] {
-        set {
-            let data = try? JSONEncoder().encode(newValue)
-            UserDefaults.standard.set(data, forKey: DefaultKeys.score)
-            UserDefaults.standard.synchronize()
-        }
-        get {
-            let data = UserDefaults.standard.data(forKey: DefaultKeys.score) ?? Data()
-            let scores = (try? JSONDecoder().decode([Score].self, from: data) ) ?? []
-            return scores
         }
     }
 }

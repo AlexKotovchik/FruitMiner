@@ -20,40 +20,6 @@ enum CardNames: Int, CaseIterable {
     }
 }
 
-struct Constants {
-    static let screenWidth: CGFloat = UIScreen.main.bounds.width
-    static let screenHeight: CGFloat = UIScreen.main.bounds.height
-    static var cardWidth: CGFloat {
-        let count = CGFloat(Options.shared.difficulty.size)
-        return (screenWidth - 40 - 5 * (count - 1)) / count
-    }
-    static let cardSpacing: CGFloat = 5
-    static let topPadding = UIApplication.shared.windows.first?.safeAreaInsets.top
-}
-
-struct ZOrder {
-    static let background: CGFloat = 0
-    static let field: CGFloat = 5
-    static let card: CGFloat = 10
-    static let label: CGFloat = 10
-    static let emitters: CGFloat = 20
-}
-
-class NodeBuilder {
-    static func createCard(size: CGSize) -> Card {
-        let card = Card(size: size)
-        card.zPosition = ZOrder.card
-        return card
-    }
-    
-    static func createGoldSplash() -> SKEmitterNode {
-        guard let emitter = SKEmitterNode(fileNamed: "GoldParticles") else { return SKEmitterNode() }
-        emitter.particleSize = CGSize(width: 7, height: 7)
-        emitter.zPosition = ZOrder.emitters
-        return emitter
-    }
-}
-
 class Card: SKSpriteNode {
     var openedTextureName: String = ""
     var isSpecial: Bool = false {
@@ -81,6 +47,7 @@ class Card: SKSpriteNode {
         let texture = SKTexture(imageNamed: "closed_card")
         super.init(texture: texture, color: .clear, size: size)
         setRandomOpenedTexture()
+        zPosition = ZOrder.card
         name = "card"
     }
     
