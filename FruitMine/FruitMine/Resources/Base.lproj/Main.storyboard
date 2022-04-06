@@ -258,10 +258,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view alpha="0.55000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MpO-du-neL">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="605.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="qfo-Se-4a8">
-                                                <rect key="frame" x="39" y="100" width="336" height="405.5"/>
+                                                <rect key="frame" x="39" y="245.5" width="336" height="405.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GameOver" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prR-7p-rGV">
                                                         <rect key="frame" x="0.0" y="0.0" width="336" height="61"/>
@@ -305,8 +305,7 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="qfo-Se-4a8" firstAttribute="centerX" secondItem="MpO-du-neL" secondAttribute="centerX" id="4Aw-L1-lvR"/>
-                                            <constraint firstAttribute="bottom" secondItem="qfo-Se-4a8" secondAttribute="bottom" constant="100" id="Gep-I3-1Qx"/>
-                                            <constraint firstItem="qfo-Se-4a8" firstAttribute="top" secondItem="MpO-du-neL" secondAttribute="top" constant="100" id="Jyx-0E-RcC"/>
+                                            <constraint firstItem="qfo-Se-4a8" firstAttribute="centerY" secondItem="MpO-du-neL" secondAttribute="centerY" id="uu4-BO-Klu"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -315,6 +314,7 @@
                                     <constraint firstItem="MpO-du-neL" firstAttribute="trailing" secondItem="JrA-ev-E6N" secondAttribute="trailing" id="NMr-sm-Jqz"/>
                                     <constraint firstItem="MpO-du-neL" firstAttribute="width" secondItem="wKo-Td-cy7" secondAttribute="width" id="OD3-j0-0O3"/>
                                     <constraint firstItem="MpO-du-neL" firstAttribute="top" secondItem="JrA-ev-E6N" secondAttribute="top" id="VRr-Vr-a3Q"/>
+                                    <constraint firstItem="MpO-du-neL" firstAttribute="height" secondItem="wKo-Td-cy7" secondAttribute="height" id="YEN-TB-Hqq"/>
                                     <constraint firstItem="MpO-du-neL" firstAttribute="leading" secondItem="JrA-ev-E6N" secondAttribute="leading" id="lic-Wf-6ea"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="JrA-ev-E6N"/>
